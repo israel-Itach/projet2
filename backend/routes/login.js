@@ -3,7 +3,7 @@ var router = express.Router();
 const pool = require("../config/db");
 
 router.post('/', (req, res) => {
-    const { email, password } = req.body;
+    const { email, password } = req.body; 
   
     const sql = `SELECT * FROM users WHERE email = ? AND password = ?`;
     pool.query(sql, [email, password], (err, results) => {
