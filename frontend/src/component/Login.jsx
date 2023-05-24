@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [showInventoryPage, setShowInventoryPage] = useState(false);
-
+  // const [showInventoryPage, setShowInventoryPage] = useState(false);
+  const navigate = useNavigate();
   const handleLogin = async () => {
     try {
       const response = await fetch("http://localhost:3001/login", {
@@ -23,11 +24,13 @@ function LoginPage() {
       if (response.ok) {
         // התחברות מוצלחת
         setErrorMessage("");
-        setShowInventoryPage(true);
+        navigate("/inventory");
       } else {
         // התחברות נכשלה
         const errorText = await response.text();
         setErrorMessage(errorText);
+        setEmail("");
+        setPassword("");
       }
     } catch (error) {
       console.error(error);
@@ -45,9 +48,9 @@ function LoginPage() {
         minHeight: "100vh",
       }}
     >
-      <Typography variant="h2" align="center" gutterBottom>
+      {/* <Typography variant="h2" align="center" gutterBottom>
         {showInventoryPage ? "התחברת בהצלחה!" : "דף התחברות"}
-      </Typography>
+      </Typography> */}
       <Box
         sx={{
           display: "flex",
@@ -71,11 +74,6 @@ function LoginPage() {
         </Button>
         לא רשום? <a href="/signup">לחץ כאן להרשמה</a>
         {errorMessage && <div>{errorMessage}</div>}
-        {showInventoryPage && (
-          <div>
-            <a href="/inventory">מעבר לדף המלאי</a>
-          </div>
-        )}
       </Box>
     </Box>
   );
