@@ -1,0 +1,76 @@
+.AddBike {
+    margin: 0 auto; /* מרחק מהשוליים */
+    max-width: 600px; /* רוחב מקסימלי */
+    background-color: #f8f9fa; /* צבע רקע */
+    padding: 2rem; /* מרווח בין התכנים לקצוות */
+    border-radius: 0.5rem; /* העגלות */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* צל */
+  }
+  
+  .AddBike h2 {
+    margin-top: 0; /* מרווח בין הכותרת למקום הקודם */
+    text-align: center; /* מיקום הכותרת */
+    font-size: 2rem; /* גודל טקסט */
+    font-weight: 600; /* משקל טקסט */
+    color: #007bff; /* צבע טקסט */
+    margin-bottom: 2rem; /* מרווח בין הכותרת לתוכן הבא */
+  }
+  
+  .AddBike form {
+    display: flex; /* סידור אלמנטים כברירת מחדל בשורה אחת */
+    flex-direction: column; /* סדר האלמנטים בטור */
+    align-items: center; /* מרכז את האלמנטים לכיוון האופקי */
+  }
+  
+  .AddBike .form-group {
+    margin-bottom: 2rem; /* מרווח בין קבוצת הטופס לתוכן הבא */
+    width: 100%; /* רוחב מקסימלי */
+  }
+  
+  .AddBike .form-label {
+    display: block; /* משנה את התצוגה לבלוק */
+    font-size: 1.25rem; /* גודל טקסט */
+    font-weight: 600; /* משקל טקסט */
+    margin-bottom: 0.5rem; /* מרווח בין התווית לתכנים הבאים */
+  }
+  
+  .AddBike .form-input,
+  .AddBike .form-textarea {
+    display: block; /* משנה את התצוגה לבלוק */
+    width: 100%; /* רוחב מקסימלי */
+    padding: 0.5rem; /* מרווח בתוך האלמנט */
+    font-size: 1rem; /* גודל טקסט */
+    border-radius: 0.25rem; /* העגלות */
+    border:1px solid #ced4da; /* צבע גבול */
+    transition: border-color 0.2s ease-in-out; /* אנימציה לצבע הגבול */
+    }
+    
+    .AddBike .form-input:focus,
+    .AddBike .form-textarea:focus {
+    outline: none; /* מסיר תופעת העכבר */
+    border-color: #007bff; /* צבע גבול כאשר האלמנט פעיל */
+    }
+    
+    .AddBike .form-textarea {
+    resize: vertical; /* מאפשר להגדיל רק בכיוון האנכי */
+    }
+    
+    .AddBike .form-btn {
+    display: inline-block; /* משנה את התצוגה לבלוק */
+    background-color: #007bff; /* צבע רקע */
+    color: #fff; /* צבע טקסט */
+    font-size: 1rem; /* גודל טקסט */
+    font-weight: 600; /* משקל טקסט */
+    padding: 0.5rem 1rem; /* מרווח בתוך האלמנט */
+    border-radius: 0.25rem; /* העגלות */
+    border: none; /* אין גבול */
+    cursor: pointer; /* סמן עכבר כדי להציג השתמשות */
+    transition: background-color 0.2s ease-in-out; /* אנימציה לצבע הרקע */
+    }
+    
+    .AddBike .form-btn:hover {
+    background-color: #0069d9; /* צבע רקע כאשר העכבר מעל האלמנט */
+    }
+  
+  
+  

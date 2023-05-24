@@ -66,4 +66,8 @@
   button[type="submit"]:hover {
     background-color: #0069d9;
   }
-  
+  .flex-container {
+    display: flex;
+    flex-direction: row;
+    background-color: DodgerBlue;
+  }
