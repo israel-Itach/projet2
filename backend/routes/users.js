@@ -1,5 +1,5 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const pool = require("../config/db");
 
 /* GET users listing. */
@@ -14,6 +14,28 @@ router.get("/", (req, res) => {
     }
   });
 });
+router.get(`/`, (req, res) => {
+  const username = req.query.name;
+
+  // ביצוע שאילתת הבדיקה במסד הנתונים
+  pool.query(
+    'SELECT COUNT(*) AS count FROM users WHERE name = ?',
+    [username],
+    (error, results) => {
+      if (error) {
+        console.error('Error executing query: ', error);
+        res.status(500).json({ error: 'An error occurred' });
+        return;
+      }
+
+      const count = results[0].count;
+      const isRegistered = count > 0;
+
+      res.json({ isRegistered });
+    }
+  );
+});
+
 // // Add a new user
 // router.post("/", (req, res) => {
 //   const { name, email, password } = req.body;

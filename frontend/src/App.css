@@ -66,8 +66,13 @@
   button[type="submit"]:hover {
     background-color: #0069d9;
   }
-  .flex-container {
-    display: flex;
-    flex-direction: row;
-    background-color: DodgerBlue;
+  .card-container {
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr; /* התפרסות השורות */
+    height: 100%; /* גובה מקסימלי של הכרטיס */
   }
+  
+  
+  
+  
+  

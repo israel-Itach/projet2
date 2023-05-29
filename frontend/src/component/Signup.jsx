@@ -49,26 +49,7 @@ function Signup() {
         // setError(error);
       });
   };
-  // const handleDelete = () => {
-  //   fetch(`http://localhost:3001/users/${id}`, {
-  //     method: "DELETE",
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Failed to delete bike");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log("Bike deleted successfully");
-  //       // Do something after the bike is deleted
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //       // Handle the error
-  //     });
-  // };
-     
+   
   return (
     <form onSubmit={handleSubmit}>
       <h2>טופס הרשמה</h2>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function LoginPage() {
+function LoginPage({setUser}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -23,8 +23,16 @@ function LoginPage() {
 
       if (response.ok) {
         // התחברות מוצלחת
+        const userDetails = await response.json();
+
+        // Save user details in local storage
+        localStorage.setItem('user', JSON.stringify(userDetails));
+        setUser(userDetails);
+        console.log('User details saved in local storage:', userDetails);
+
         setErrorMessage("");
-        navigate("/inventory");
+        
+        navigate("/bikepage");
       } else {
         // התחברות נכשלה
         const errorText = await response.text();
@@ -48,9 +56,9 @@ function LoginPage() {
         minHeight: "100vh",
       }}
     >
-      {/* <Typography variant="h2" align="center" gutterBottom>
-        {showInventoryPage ? "התחברת בהצלחה!" : "דף התחברות"}
-      </Typography> */}
+      <Typography variant="h2" align="center" gutterBottom>
+        דף התחברות
+      </Typography>
       <Box
         sx={{
           display: "flex",
