@@ -2,14 +2,21 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../config/db");
 
-//לקבל את כל האופניים
+// לקבל את כל האופניים
 router.get("/", (req, res) => {
+  const isAdmin = true; // לאמת מנהל
   pool.query("SELECT * FROM bike", (error, results) => {
     if (error) {
       console.error(error);
       res.status(500).json({ error: "Internal server error" });
     } else {
-      res.json(results);
+      res.json(
+        results.map((b) => ({
+          ...b,
+          isAvailable: b.user_id ? false : true,
+          user_id: isAdmin ? b.user_id : undefined,
+        }))
+      );
     }
   });
 });
@@ -44,6 +51,8 @@ router.put("/:id", (req, res) => {
 router.put("/order/:id", (req, res) => {
   // מזהה אופנים
   const { id } = req.params;
+  // מזהה משתמש
+  const { userId } = req.body;
 
   // לקבל את האופניים ע"פ מזהה האופנים
   const sql = `SELECT * FROM bike WHERE id = ?`;
@@ -51,7 +60,7 @@ router.put("/order/:id", (req, res) => {
     if (err) return res.status(500).json({ error: "Internal server error" });
     // אם זמין, להזמין
     else if (results.length && results[0].isAvailable) {
-      pool.query(`UPDATE bike SET isAvailable = 0 WHERE id = ?`, [id], (error, results) => {
+      pool.query(`UPDATE bike SET user_id = ? WHERE id = ?`, [userId, id], (error, results) => {
         if (error) {
           console.error(error);
           res.status(500).json({ error: "Internal server error" });
@@ -67,7 +76,7 @@ router.put("/order/:id", (req, res) => {
   });
 });
 
-// Add a new bike
+// // Add a new bike
 router.post("/", (req, res) => {
   const { name, description, image_url } = req.body;
   const sql = `INSERT INTO bike ( name, description, image_url) VALUES ('${name}', '${description}', '${image_url}')`;

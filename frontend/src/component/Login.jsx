@@ -29,7 +29,6 @@ function LoginPage({setUser}) {
         localStorage.setItem('user', JSON.stringify(userDetails));
         setUser(userDetails);
         console.log('User details saved in local storage:', userDetails);
-
         setErrorMessage("");
         
         navigate("/bikepage");

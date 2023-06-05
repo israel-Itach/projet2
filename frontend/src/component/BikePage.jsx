@@ -1,11 +1,11 @@
 import React from 'react';
 import Bike from './Bike';
 
-function BikePage({bikes, user}) {
+function BikePage({bikes, user, setIsAvailable}) {
   return (
     <div>
        {console.log(bikes)} 
-      <Bike bikes={bikes} user={user} data={{ name: 'Bike Name', description: 'Bike Description', image_url: 'bike_image_url', isAvailable: true }} />
+      <Bike setIsAvailable={setIsAvailable} bikes={bikes} user={user} data={{ name: 'Bike Name', description: 'Bike Description', image_url: 'bike_image_url', isAvailable: true }} />
       
     </div>
   );

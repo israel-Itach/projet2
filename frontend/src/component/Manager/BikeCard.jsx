@@ -5,11 +5,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Stack from "@mui/material/Stack";
 
-function BikeCard({
-  remove,
-  data: { name, description, image_url, isAvailable, id },
-}) {
+function BikeCard({ remove, data: { name, description, image_url, isAvailable, id, user_id } }) {
   const [isOrdered, setIsOrdered] = useState(false);
+  const [data, setData] = useState(null);
 
   const handleDelete = () => {
     fetch(`http://localhost:3001/bike/${id}`, {
@@ -52,6 +50,20 @@ function BikeCard({
     // Implement the edit functionality here
     console.log("Edit bike");
   };
+  const getUserInfo = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/users/${user_id}`);
+      if (response.ok) {
+        setData(await response.json());
+      } else {
+        setData(null);
+      }
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      setData(null);
+    }
+  };
+  useEffect(() => getUserInfo, []);
 
   return (
     <Card style={{ width: "18rem", margin: "25px" }}>
@@ -59,26 +71,20 @@ function BikeCard({
       <Card.Body>
         <Card.Title>{name && name}</Card.Title>
         <Card.Text>{description && description}</Card.Text>
-
-        <Button variant="contained" color="primary" onClick={handleOrder}>
-          {isOrdered ? " לזמין" : "הפוך ללא זמין"}
-        </Button>
+        {user_id && data && (
+          <div>
+            <Card.Text>האופניים נתפסו ע"י:{data.name}</Card.Text>
+            <Card.Text>המייל שלו הוא::{data.email}</Card.Text>
+          </div>
+        )}
       </Card.Body>
 
       <Stack direction="row" spacing={2}>
-        <Button
-          variant="outlined"
-          onClick={handleDelete}
-          startIcon={<DeleteIcon />}
-        >
+        <Button variant="outlined" onClick={handleDelete} startIcon={<DeleteIcon />}>
           Delete
         </Button>
 
-        <Button
-          variant="outlined"
-          onClick={handleEdit}
-          startIcon={<EditIcon />}
-        >
+        <Button variant="outlined" onClick={handleEdit} startIcon={<EditIcon />}>
           Edit
         </Button>
       </Stack>

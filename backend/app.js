@@ -9,27 +9,23 @@ const cors = require('cors');
 const bikeRouter = require('./routes/Bike');
 const manegeRouter = require('./routes/maneger');
 const loginRouter = require('./routes/login');
-
-const connection = mySql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "1234",
-  database: "bikeDb",
-});
+const contactsRouter = require('./routes/contacts');
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-
+app.use('/contacts', contactsRouter);
 app.use('/bike', bikeRouter);
 app.use("/users", usersRouter);
 app.use('/maneger', manegeRouter);
 app.use('/login', loginRouter);
+
+
 
 // app.use(express.static(path.join(__dirname, 'public')));
 

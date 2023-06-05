@@ -17,11 +17,21 @@ const Navigation = () => {
         </Button>
         <Button
           component={Link}
-          to="/intermediate/delete"
+          to="/intermediate/inventory"
           variant="contained"
           color="primary"
+          sx={{ marginBottom: '10px' }}
         >
-          Delete
+          Inventory
+        </Button>
+        <Button
+          component={Link}
+          to="/intermediate/MessageList"
+          variant="contained"
+          color="primary"
+          sx={{ marginBottom: '10px' }}
+        >
+          MessageList
         </Button>
       </Box>
     </nav>

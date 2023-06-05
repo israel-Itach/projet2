@@ -32,6 +32,8 @@ const AdminLogin = () => {
         if (data.error) {
           // שגיאה בפרטי הכניסה
           alert(data.error);
+          setUsername("");
+          setPassword("");
         } else {
           // הכניסה לאיזור האישי
           console.log("התחברת בהצלחה!");
@@ -45,8 +47,7 @@ const AdminLogin = () => {
         console.error("שגיאה בביצוע הבקשה:", error);
       });
 
-    // setUsername("");
-    // setPassword("");
+    
   };
 
   return (

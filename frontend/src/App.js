@@ -12,11 +12,13 @@ import Navigate from "./component/Navigate";
 import { useState, useEffect } from "react";
 import LoginPage from "./component/Login";
 import BikePage from "./component/BikePage";
+import Footer from "./component/footer";
+import ContactForm from "./component/contacts";
+import MessageList from "./component/Manager/MessageList";
 
 function App() {
   const [bikes, setBikes] = useState([]);
   const [user, setUser] = useState("");
-
   useEffect(() => {
     // setUser
     try {
@@ -36,23 +38,37 @@ function App() {
   const removeBike = (id) => {
     setBikes([...bikes.filter((bike) => bike.id != id)]);
   };
+  const setIsAvailable = (bikeId, status) => {
+    setBikes((prevState) => {
+      const updatedBikes = prevState.map((bike) =>
+        bike.id === bikeId ? { ...bike, isAvailable: status } : bike
+      );
+      console.log("updatedBikes: ", updatedBikes);
+      return updatedBikes;
+    });
+  };
 
   return (
     <>
-      <div>
-        <NavigationBar setUser={setUser} user={user}/>
+      <div className="container">
+        <div className="content">
+          <NavigationBar setUser={setUser} user={user} />
 
-        <Routes>
-          <Route path="/bikepage" element={<BikePage user={user} bikes={bikes} />} />
-          <Route path="/intermediate/addbike" element={<AddBike addBike={addBike} />} />
-          <Route path="/intermediate/delete" element={<ManagerInventory bikes={bikes} removeBike={removeBike} />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<SignupForm />} />
-          <Route path="/questions" element={<FAQPage />} />
-          <Route path="login" element={<LoginPage setUser={setUser}/>} />
-          <Route path="/PersonalArea/navigate" element={<Navigate />} />
-          <Route path="/PersonalArea" element={<AdminLogin />} />
-        </Routes>
+          <Routes>
+            <Route path="/bikepage" element={<BikePage user={user} bikes={bikes} setIsAvailable={setIsAvailable} />} />
+            <Route path="/intermediate/addbike" element={<AddBike addBike={addBike} />} />
+            <Route path="/intermediate/inventory" element={<ManagerInventory bikes={bikes} removeBike={removeBike} />} />
+            <Route path="/intermediate/MessageList" element={<MessageList />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<SignupForm />} />
+            <Route path="/questions" element={<FAQPage />} />
+            <Route path="/contacts" element={<ContactForm />} />
+            <Route path="login" element={<LoginPage setUser={setUser} />} />
+            <Route path="/PersonalArea/navigate" element={<Navigate />} />
+            <Route path="/PersonalArea" element={<AdminLogin />} />
+          </Routes>
+        </div>
+        <Footer className="footer" />
       </div>
     </>
   );

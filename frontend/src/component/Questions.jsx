@@ -1,98 +1,44 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
-import MuiAccordion from '@mui/material/Accordion';
-import MuiAccordionSummary from '@mui/material/AccordionSummary';
-import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
+import React from 'react';
+import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const Accordion = styled((props) => (
-  <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-  border: `1px solid ${theme.palette.divider}`,
-  '&:not(:last-child)': {
-    borderBottom: 0,
-  },
-  '&:before': {
-    display: 'none',
-  },
-}));
-
-const AccordionSummary = styled((props) => (
-  <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
-    {...props}
-  />
-))(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, .05)'
-      : 'rgba(0, 0, 0, .03)',
-  flexDirection: 'row-reverse',
-  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-    transform: 'rotate(90deg)',
-  },
-  '& .MuiAccordionSummary-content': {
-    marginLeft: theme.spacing(1),
-  },
-}));
-
-const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(2),
-  borderTop: '1px solid rgba(0, 0, 0, .125)',
-}));
-
-export default function CustomizedAccordions() {
-  const [expanded, setExpanded] = React.useState('panel1');
-
-  const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
-  };
-
+const FAQAccordion = () => {
   return (
-    <div  style={{ marginTop: '10px' }}>
-      <h1>שאלות נפוצות</h1>
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>איך אני משאיל אופניים באתר</Typography>
+    <div>
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography variant="h6">מה התהליך להשאלת אופניים?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-          תשובה: כדי לשאול או להשאיל אופניים באתר, יש לבצע את השלבים הבאים:
+            התהליך להשאלת אופניים פשוט וקל. יש לבחור את האופניים הרצויות מתוך המבחר הזמין באתר, למלא את פרטי ההשכרה ולבצע את ההזמנה.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
 
-בדוק את זמינות האופניים שברצונך לשאול או להשאיל.1
-לחץ על כפתור "שאל/השאיל" על מנת להמשיך לתהליך השאלה או ההשאלה.2
-בטופס המתאים, מלא את הפרטים הנדרשים כמו שם, תאריך תחילת השאלה/השאלה ותאריך סיום.3
-לחץ על כפתור "אישור" כדי להשלים את התהליך.4
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>Collapsible Group Item #2</Typography>
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography variant="h6">איך אני מחזיר את האופניים ששאלתי?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
+            תהליך ההחזרה פשוט וקל. יש להגיע לנקודת האיסוף בזמן ההחזרה המצופה ולהחזיר את האופניים עם כל האביזרים שנמצאו בחבילה.
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Collapsible Group Item #3</Typography>
+
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography variant="h6">איך אני מבטל הזמנה של אופניים?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
+            ניתן לבטל הזמנה של אופניים בכל עת על ידי יצירת קשר עם שירות הלקוחות שלנו. אנא שים לב שישנם תנאים ומגבלות לביטול ההזמנה.
           </Typography>
         </AccordionDetails>
       </Accordion>
     </div>
   );
-}
+};
+
+export default FAQAccordion;

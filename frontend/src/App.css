@@ -71,6 +71,29 @@
     grid-template-rows: 1fr 2fr 1fr; /* התפרסות השורות */
     height: 100%; /* גובה מקסימלי של הכרטיס */
   }
+
+  /* html, body {
+    margin-right: 0px;
+    margin-left: 0px;
+  } */
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .content {
+    flex: 1;
+  }
+  
+  .footer {
+    flex-shrink: 0;
+  }
+  
+  
+
+  
   
   
   

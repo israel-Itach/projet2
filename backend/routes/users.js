@@ -36,6 +36,16 @@ router.get(`/`, (req, res) => {
   );
 });
 
+// get a user by id
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  const sql = `select * FROM users WHERE id = ${id}`;
+  pool.query(sql, (err, results) => {
+    if (err) throw err;
+    res.send(results[0]);
+  });
+});
+
 // // Add a new user
 // router.post("/", (req, res) => {
 //   const { name, email, password } = req.body;
