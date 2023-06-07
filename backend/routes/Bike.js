@@ -14,7 +14,6 @@ router.get("/", (req, res) => {
         results.map((b) => ({
           ...b,
           isAvailable: b.user_id ? false : true,
-          user_id: isAdmin ? b.user_id : undefined,
         }))
       );
     }
@@ -48,18 +47,18 @@ router.put("/:id", (req, res) => {
 });
 
 // Order Bike
-router.put("/order/:id", (req, res) => {
+router.post("/order/:id", (req, res) => {
   // מזהה אופנים
   const { id } = req.params;
   // מזהה משתמש
   const { userId } = req.body;
-
+console.log(id, userId);
   // לקבל את האופניים ע"פ מזהה האופנים
   const sql = `SELECT * FROM bike WHERE id = ?`;
   pool.query(sql, [id], (err, results) => {
     if (err) return res.status(500).json({ error: "Internal server error" });
     // אם זמין, להזמין
-    else if (results.length && results[0].isAvailable) {
+    else if (results.length && !results[0].user_id) {
       pool.query(`UPDATE bike SET user_id = ? WHERE id = ?`, [userId, id], (error, results) => {
         if (error) {
           console.error(error);

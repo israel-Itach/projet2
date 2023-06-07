@@ -3,14 +3,9 @@ import Button from "@mui/material/Button";
 import Card from "react-bootstrap/Card";
 import RegistrationForm from "./RegistrationForm";
 
-
-
 function BikeCardFront({setIsAvailable, user,
-  data: { name, description, image_url, isAvailable, id },
-}) {
-  // const [isOrdered, setIsOrdered] = useState(false);
-
-
+  data: { name, description, image_url, isAvailable, id }}){
+ 
   return (
     <Card className="card-container" style={{ width: "18rem", margin: "25px" }}>
     <Card.Img className="card-image" variant="top" src={image_url} />

@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use('/contacts', contactsRouter);
 app.use('/bike', bikeRouter);
 app.use("/users", usersRouter);
-app.use('/maneger', manegeRouter);
+app.use('/manager', manegeRouter);
 app.use('/login', loginRouter);
 
 

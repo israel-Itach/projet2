@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Card from "react-bootstrap/Card";
+import ListGroup from 'react-bootstrap/ListGroup';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Stack from "@mui/material/Stack";
 
-function BikeCard({ remove, data: { name, description, image_url, isAvailable, id, user_id } }) {
+function BikeCard({ remove, data: { name, description, image_url, id, user_id } }) {
   const [isOrdered, setIsOrdered] = useState(false);
   const [data, setData] = useState(null);
 
@@ -73,8 +74,10 @@ function BikeCard({ remove, data: { name, description, image_url, isAvailable, i
         <Card.Text>{description && description}</Card.Text>
         {user_id && data && (
           <div>
-            <Card.Text>האופניים נתפסו ע"י:{data.name}</Card.Text>
-            <Card.Text>המייל שלו הוא::{data.email}</Card.Text>
+            <ListGroup variant="flush">
+        <ListGroup.Item>האופניים נתפסו ע"י:{data.name}</ListGroup.Item>
+        <ListGroup.Item>המייל שלו הוא:{data.email}</ListGroup.Item>
+      </ListGroup>
           </div>
         )}
       </Card.Body>
@@ -84,8 +87,8 @@ function BikeCard({ remove, data: { name, description, image_url, isAvailable, i
           Delete
         </Button>
 
-        <Button variant="outlined" onClick={handleEdit} startIcon={<EditIcon />}>
-          Edit
+        <Button variant="outlined" onClick={handleEdit} disabled={!user_id} startIcon={<EditIcon />}>
+         שחרר אופניים
         </Button>
       </Stack>
     </Card>

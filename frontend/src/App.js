@@ -15,6 +15,7 @@ import BikePage from "./component/BikePage";
 import Footer from "./component/footer";
 import ContactForm from "./component/contacts";
 import MessageList from "./component/Manager/MessageList";
+import { BikeProvider } from "./Services/bikeContext";
 
 function App() {
   const [bikes, setBikes] = useState([]);
@@ -38,10 +39,11 @@ function App() {
   const removeBike = (id) => {
     setBikes([...bikes.filter((bike) => bike.id != id)]);
   };
-  const setIsAvailable = (bikeId, status) => {
+  
+  const setIsAvailable = (bikeId, statusNum) => {
     setBikes((prevState) => {
       const updatedBikes = prevState.map((bike) =>
-        bike.id === bikeId ? { ...bike, isAvailable: status } : bike
+        bike.id === bikeId ? { ...bike, isAvailable: statusNum } : bike
       );
       console.log("updatedBikes: ", updatedBikes);
       return updatedBikes;
@@ -49,7 +51,8 @@ function App() {
   };
 
   return (
-    <>
+    <BikeProvider value={{user, setIsAvailable}}>
+  
       <div className="container">
         <div className="content">
           <NavigationBar setUser={setUser} user={user} />
@@ -57,7 +60,7 @@ function App() {
           <Routes>
             <Route path="/bikepage" element={<BikePage user={user} bikes={bikes} setIsAvailable={setIsAvailable} />} />
             <Route path="/intermediate/addbike" element={<AddBike addBike={addBike} />} />
-            <Route path="/intermediate/inventory" element={<ManagerInventory bikes={bikes} removeBike={removeBike} />} />
+            <Route path="/intermediate/inventory" element={<ManagerInventory />} />
             <Route path="/intermediate/MessageList" element={<MessageList />} />
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignupForm />} />
@@ -70,7 +73,8 @@ function App() {
         </div>
         <Footer className="footer" />
       </div>
-    </>
+    </BikeProvider>
+
   );
 }
 

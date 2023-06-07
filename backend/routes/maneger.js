@@ -29,4 +29,16 @@ router.post("/", (req, res) => {
   });
 });
 
+// לקבל את כל האופניים
+router.get("/bike", (req, res) => {
+  pool.query("SELECT * FROM bike", (error, results) => {
+    if (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
 module.exports = router;

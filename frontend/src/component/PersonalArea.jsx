@@ -19,7 +19,7 @@ const AdminLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3001/maneger", {
+    fetch("http://localhost:3001/manager", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
